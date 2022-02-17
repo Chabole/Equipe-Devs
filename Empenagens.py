@@ -7,36 +7,52 @@ Created on Fri Jul  9 14:45:21 2021
 
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
-calc = (3.2-1.86) - ((1 / 4) * 0.526)
+start = time.time()
+ 
+# x = (Limite regulamento - envergadura) - dist_motor até c.a.
+x = 889.43 / 1000 
+S = 0.843         # Área da asa  
+b = 1.86          # Envergadura 
+c_medium = 0.463  # Corda média da asa
+AR = 3            # Alongamento
 
-x = 889.43 / 1000
-S = 0.843
-b = 1.86
-c_medium = 0.463
-AR = 3
-teta = np.linspace(np.pi/36, np.pi/18, 20)
-# l_ht = 0.67874
-cht = np.linspace(.150,.400, 20)
+# Inclinação entre centro aerodiâmico da asa e do profundor
+teta = np.linspace(np.pi/36, np.pi/18, 20) # 5 até 10 #np.degrees()
+
+# Intervalos de cordas possíveis - profundor
+cht = np.linspace(.150, .400, 20)
+
+# Area da asa pela relação (S = c**2)*AR
 s_it = (cht ** 2) * AR
-# bht = (s_it / cht)
 
+#São lmitações
 V_ht = [0.35, 0.5]
 
+#LISTAS CRIADAS
+Vht = list()       #Volume de cauda
+Sht_old = list()   #Área de cauda inicial
+lht_save = list()  #Distância entre c.a. da asa e do profundor inicial
+lht_f = list()     #Distância entre c.a. da asa e do profundor final
+Sht_f = list()     #Área de cauda final
+teta_save = list() #Inclinação entre c.a. da asa e do profundo 
 
-# s_it = np.linspace(0,1,200)
-Vht = list(); Sht_old = list(); lht_save = list(); lht_f = list(); Sht_f = list(); teta_save = list()
-
+#Variando pra cada ângulo
 for k in teta:
-    l_ht = (x - cht * (3 / 4)) / np.cos(k)
-    for i, S_ht in enumerate(s_it):
+    l_ht = (x - cht * (3 / 4)) / np.cos(k) 
+
+    for S_ht in (s_it):
         Vht_test = ((l_ht) * S_ht) / (c_medium * S)
-        for j in range(0, len(Vht_test)):
+
+        for j in range(len(Vht_test)):
             x_test = l_ht[j] * np.cos(k) + (3 / 4) * (S_ht / AR) ** (1 / 2)
+            
+            #Condição filtragem
             if (Vht_test[j] >= V_ht[0] and Vht_test[j] <= V_ht[1] and x_test <= x and x_test >= x*0.99):
                 Vht.append(Vht_test[j])
                 Sht_old.append(S_ht)
-                lht_save.append(l_ht[j])
+                lht_save.append(l_ht[j]) 
                 teta_save.append(k)
         
 Sht_n = np.array(Sht_old)
@@ -91,6 +107,10 @@ ax2.plot([-(1/4)*0.526,(3/4)*0.526],[0,0])
 ax2.plot([0,0], [0,-0.16])
 ax2.set_xlim(0, 1)
 plt.axis('equal')
+
+print(f'termino em {time.time()-start}')
+
+plt.show()
 
 # Vvt = (l_vt * S_vt) / (b * S) 
 
