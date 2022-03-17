@@ -23,3 +23,18 @@ class plane:
         self.y_pos = np.linspace(0.3*ylim, ylim)
         self.x_pos = self.y_pos/np.tan(np.radians(self.teta))
         self.L = np.sqrt((self.x_pos*2)+(self.y_pos*2))
+
+    def __filtragem(self, m, lim_min, lim_max):
+        Vx = np.ravel(m)
+        V = list()
+        indice = list()
+        p = len(m[0])
+        for n in range(len(Vx)):
+            if lim_min <= Vx[n] <= lim_max:
+                V.append(Vx[n])
+                indice.append(n)
+        valor = np.array((indice)) / p
+        v_pos_x = valor.astype(int)
+        c = (valor - v_pos_x) * p
+        v_pos_y = (np.around(c)).astype(int)
+        return V, v_pos_x, v_pos_y
