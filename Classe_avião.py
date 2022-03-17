@@ -17,8 +17,9 @@ class plane:
 
         #Calculos
 
-        self.__calc_L()
-    
+        print('arthur')
+        self.__calc_L(); bbb=0
+        print ('erro')
     def __calc_L(self, xlim=2.5, ylim=0.3):
         self.y_pos = np.linspace(0.3*ylim, ylim)
         self.x_pos = self.y_pos/np.tan(np.radians(self.teta))
