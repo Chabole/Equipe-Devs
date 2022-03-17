@@ -20,6 +20,8 @@ class plane:
         self.__calc_L()
     
     def __calc_L(self, xlim=2.5, ylim=0.3):
+        print('haha')
+        print('chabole, libera a kesya, ela tem estágio amanha w.w')
         self.y_pos = np.linspace(0.3*ylim, ylim)
         self.x_pos = self.y_pos/np.tan(np.radians(self.teta))
         self.L = np.sqrt((self.x_pos*2)+(self.y_pos*2))
