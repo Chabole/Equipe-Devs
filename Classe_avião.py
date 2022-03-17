@@ -8,4 +8,13 @@ class plane:
         self.Sw = Sw
         self.teta = teta
         self.cw = cw
-        self.bw = bw
+        self.bw = bw 
+                #Profundor e leme
+        self.AR = AR
+        self.S = np.linspace(0.05, 0.5)
+        self.c = (self.S / self.AR) **(1 / 2)
+        self.b = self.S/self.c
+
+        #Calculos
+
+        self.__calc_L()
