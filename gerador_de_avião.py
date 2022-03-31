@@ -27,4 +27,5 @@ class Aviao():
 start = time.time()
 teste = Aviao()
 a = teste.dados()
+print(a)
 print(time.time() - start)
