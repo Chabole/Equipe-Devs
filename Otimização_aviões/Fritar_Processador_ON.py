@@ -6,7 +6,7 @@ import random
 from tqdm import tqdm
 import itertools
 
-it = int(100)
+it = int(5)
 
 Cr = np.linspace(0.1, 0.8, it)
 Af = np.linspace(0.1, 1, it)
@@ -40,4 +40,8 @@ for x in tqdm(range(len(filtro.index))):
 
 df2 = pd.DataFrame(N)
 df2['Slo'] = Slo
-df2.to_excel('D:/resultados_aviões_BRABO.xlsx') #ESCOLHER UM LOCAL DO COMPUTADOR PRA SALVAR
+
+try:
+    df2.to_excel('D:/dados_TOP.xlsx') #ESCOLHER UM LOCAL DO COMPUTADOR PRA SALVAR
+except:
+    df2.to_csv('D:/dados_TOP_02.csv')
