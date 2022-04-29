@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 AR = 4
 afil = 0.9
 a_perfil = 5.781
+
 # alfa_0 = -14
 # alfa = 10
 
@@ -42,8 +43,8 @@ def fat_di(AR, afil):
     func = np.poly1d(z)
     
     x_ = np.linspace(x.min(), x.max(),100)
-    plt.plot(x,y,'o')
-    plt.plot(x_, func(x_))
+    #plt.plot(x,y,'o')
+    #plt.plot(x_, func(x_))
     return func(afil)
 
 #calc
@@ -58,3 +59,5 @@ def red_cl(AR, afil, a_perfil=0.1009):
     return perc_red
 
 teste = red_cl(AR, afil)
+print(f'Clmax={teste*2.025}') #2.025
+print(f'Clmax={teste*2.025}') #2.025
