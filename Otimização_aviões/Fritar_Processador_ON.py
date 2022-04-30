@@ -6,7 +6,7 @@ import random
 from tqdm import tqdm
 import itertools
 
-it = int(5)
+it = int(50)
 
 Cr = np.linspace(0.1, 0.8, it)
 Af = np.linspace(0.1, 1, it)
@@ -28,7 +28,7 @@ df['AR'] = df['b']/df['Cm']
 
 filtro = df
 
-N, Slo = [], []
+N, Slo, Slo2, Slo3 = [], [], [], []
 for x in tqdm(range(len(filtro.index))):
     Zb = zb.Airplane()
     Zb.b = filtro['b'].iloc[x]; Zb.AR = filtro['AR'].iloc[x] 
@@ -36,12 +36,16 @@ for x in tqdm(range(len(filtro.index))):
     Zb.params_Calc
 
     N.append(Zb.save('D:/Aviões_gerados_x2.xlsx', False))
-    Slo.append(Zb.takeOff_Distance_AproxMiranda())
+    #Slo.append(Zb.takeOff_Distance_AproxMiranda())
+    Slo3.append(Zb.takeOff_Distance_EDO())
+
 
 df2 = pd.DataFrame(N)
-df2['Slo'] = Slo
+#df2['Slo_miran'] = Slo
+df2['Slo_EDO'] = Slo3
+
 
 try:
-    df2.to_excel('D:/dados_TOP.xlsx') #ESCOLHER UM LOCAL DO COMPUTADOR PRA SALVAR
+    df2.to_excel('D:/outputs_aviões.xlsx') #ESCOLHER UM LOCAL DO COMPUTADOR PRA SALVAR
 except:
     df2.to_csv('D:/dados_TOP_02.csv')
