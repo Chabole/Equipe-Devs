@@ -33,19 +33,28 @@ class plane:
         Vxv = np.ravel(mv)
         Vh = list()
         Vv = list()
-        indice = list()
+        indiceh = list()
+        indicev = list()
         p = len(mh[0])
         for n in range(len(Vxh)):
-            if 0.35 <= Vxh[n] <= 0.5 and 0.04 <= Vxv[n] <= 0.06:
+            if 0.35 <= Vxh[n] <= 0.5:
                 Vh.append(Vxh[n])
-                Vv.append(Vxh[n])
-                indice.append(n)
-                
-        valor = np.array((indice)) / p
-        v_pos_x = valor.astype(int)
-        c = (valor - v_pos_x) * p
-        v_pos_y = (np.around(c)).astype(int)
-        return Vh, Vv, v_pos_x, v_pos_y
+                indiceh.append(n)
+            if 0.04 <= Vxv[n] <= 0.06:
+                Vv.append(Vxv[n])
+                indicev.append(n)
+        #Horizontal
+        valor = np.array((indiceh)) / p
+        v_posh_x = valor.astype(int)
+        c = (valor - v_posh_x) * p
+        v_posh_y = (np.around(c)).astype(int)
+        #Vertical
+        valor = np.array((indicev)) / p
+        v_posv_x = valor.astype(int)
+        c = (valor - v_posv_x) * p
+        v_posv_y = (np.around(c)).astype(int)
+        
+        return Vh, Vv, v_posh_x, v_posh_y, v_posv_x, v_posv_y
     
     def volumes(self):
         vh = []; vv = []
