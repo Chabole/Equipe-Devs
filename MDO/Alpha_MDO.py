@@ -51,10 +51,10 @@ class loteria:
         return df
     
     def PV_prev(self):
-        return gerador(self.x, 1, 4)
+        return gerador(self.x, 1, 3.5)
     
     def PV_real(self):
-        return gerador(self.x, 1, 4)
+        return gerador(self.x, 1, 3.5)
 
     def CP_prev(self):
         #5 é minima carga pra competição eu acho
@@ -65,7 +65,7 @@ class loteria:
         return gerador(self.x, 5, 20)
 
     def NR(self):
-        return gerador(self.x, 0, 185)
+        return gerador(self.x, 10, 185)
     
     def NR_max(self):
         return float(185)
