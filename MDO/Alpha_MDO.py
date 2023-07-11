@@ -2,15 +2,19 @@ import random
 from tqdm import tqdm
 import numpy as np
 import pandas as pd
-
-def gerador(x=1, min=1, max=5): 
+# Random distribution generator function
+def gerador(x=1, min=1, max=5): #The numbers "min" and "max" just are used to generate, you can use what you want 
+    #1D array
     if x==1: 
-        return float(random.uniform(min, max))
+        return float(random.uniform(min, max))  
+    #2D array or plus
     else:
-        lista = np.empty((x))
+        lista = np.empty((x)) #np.empty is faster then np.zeros or some known solution
         for i in (range(x)): 
             lista[i]=(float(random.uniform(min, max)))
         return lista
+
+"---------------------------------------------------------------------------------------------------------------------"
 
 class loteria:
     def __init__(self, x=100):
