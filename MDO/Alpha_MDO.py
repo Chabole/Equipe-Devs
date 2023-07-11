@@ -3,10 +3,12 @@ from tqdm import tqdm
 import numpy as np
 import pandas as pd
 # Random distribution generator function
-def gerador(x=1, min=1, max=5): #The numbers "min" and "max" just are used to generate, you can use what you want 
+def gerador(x=1, min=1, max=5): #The numbers "min" and "max" just are used to generate, you can use what you want  
+
     #1D array
     if x==1: 
         return float(random.uniform(min, max))  
+    
     #2D array or plus
     else:
         lista = np.empty((x)) #np.empty is faster then np.zeros or some known solution
@@ -18,9 +20,11 @@ def gerador(x=1, min=1, max=5): #The numbers "min" and "max" just are used to ge
 
 class loteria:
     def __init__(self, x=100):
-        self.x = int(x)
+        self.x = int(x) #turning any number into a integer
 
-    def gen_dados(self, loading=True):
+    #Create a DataFrame with the parameters of the SAE Aero 
+
+    def gen_dados(self, loading=True): 
         df = pd.DataFrame()
 
         df['PV_prev'] = self.PV_prev()
@@ -61,11 +65,11 @@ class loteria:
         return gerador(self.x, 1, 3.5)
 
     def CP_prev(self):
-        #5 é minima carga pra competição eu acho
+        #5 é minima carga pra competição eu acho (5 is the less load for the competition, I guess)
         return gerador(self.x, 5, 20) 
 
     def CP_real(self):
-        #5 é minima carga pra competição eu acho
+        #5 é minima carga pra competição eu acho (5 is the less load for the competition, I guess)
         return gerador(self.x, 5, 20)
 
     def NR(self):
@@ -80,13 +84,13 @@ class loteria:
 class pontuação:
 
     def __init__(self, PV_previsto, PV_real, CP_previsto, CP_real, NR, NR_max, tempo):
-        self.PV_previsto = PV_previsto #Peso vazio previsto
-        self.PV_real = PV_real         #Peso vazio real 
-        self.CP_previsto = CP_previsto #Carga paga previsto
-        self.CP_real = CP_real         #Carga paga real 
-        self.NR = NR                   #Nota de relatório
-        self.NR_max = NR_max           #Nota de relatório máxima
-        self.tempo = tempo             #Tempo de descaga
+        self.PV_previsto = PV_previsto #Peso vazio previsto #Empty predicted load 
+        self.PV_real = PV_real         #Peso vazio real     #Empty real load
+        self.CP_previsto = CP_previsto #Carga paga previsto #Predicted Payload 
+        self.CP_real = CP_real         #Carga paga real     #Real Payload
+        self.NR = NR                   #Nota de relatório   #Report grade
+        self.NR_max = NR_max           #Nota de relatório máxima #Max report grade
+        self.tempo = tempo             #Tempo de descarga    #Download time
 
     def calc(self):
         return self.PCP() + self.FPV() + self.FPR() + self.P_voo() + self.P_AC() + self.B_PO() + self.B_RC() #ainda não coloqueui B_CF 
