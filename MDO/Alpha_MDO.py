@@ -93,7 +93,10 @@ class pontuação:
         self.tempo = tempo             #Tempo de descarga    #Download time
 
     def calc(self):
-        return self.PCP() + self.FPV() + self.FPR() + self.P_voo() + self.P_AC() + self.B_PO() + self.B_RC() #ainda não coloqueui B_CF 
+        return self.PCP() + self.FPV() + self.FPR() + self.P_voo() + self.P_AC() + self.B_PO() + self.B_RC() #ainda não coloquei B_CF 
+
+
+#SAE Parameters to Maximum Pontuation (VIEW SAE RULES)   
 
     #7.8.1
     def PCP(self):
